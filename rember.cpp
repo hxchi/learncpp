@@ -21,7 +21,7 @@ int main()
 	char a[42];
 	char b[42];
 	int c;
-	int m = 0,n = 1;
+	int m = 0,n = 0;
 
 	start = clock();
 	while (1) {
@@ -33,10 +33,10 @@ int main()
 		fflush(stdout);
 		sleep(1000);
 
-		printf("now please enter you answer: ");
+		printf("\rnow please enter you answer: ");
 		scanf("%s", b);
 		printf("%s\n", b);
-		if (a == b) {
+		if (strcmp(a, b) == 0) {
 			printf("you are right...\n");
 			n++;
 		}
@@ -49,7 +49,7 @@ int main()
 
 	printf("you get %d right...\n", n);
 	printf("use %.1fs...\n", (double)(end-start)/CLOCKS_PER_SEC);
-	
+
 	// test number
 	// getnumber(20, a);
 	// for (int i = 0; i < strlen(a); i++) {
