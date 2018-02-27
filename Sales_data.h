@@ -9,7 +9,7 @@ struct Sales_data;
 Sales_data add(const Sales_data s1, const Sales_data s2);
 std::istream& read(std::istream &is, Sales_data &tmp);
 std::ostream& print(std::ostream &os, Sales_data &tmp);
-
+bool CompareIsbn(const Sales_data s1, const Sales_data s2);
 
 struct Sales_data
 {
@@ -17,6 +17,7 @@ struct Sales_data
   friend Sales_data add(const Sales_data s1, const Sales_data s2);
   friend std::istream& read(std::istream &is, Sales_data &tmp);
   friend std::ostream& print(std::ostream &os, Sales_data &tmp);
+  /* friend bool CompareIsbn(const Sales_data s1, const Sales_data s2); */
   
   // 构造函数
   Sales_data() = default;
@@ -78,5 +79,9 @@ std::ostream& print(std::ostream &os, Sales_data &tmp)
   return os;
 }
 
+bool CompareIsbn(const Sales_data s1, const Sales_data s2)
+{
+  return s1.isbn().size() < s2.isbn().size();
+}
 
 #endif
