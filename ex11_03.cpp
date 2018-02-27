@@ -2,16 +2,23 @@
 #include <string>
 #include <map>
 #include <set>
+#include <cctype>		// string字符串的方法
+#include <algorithm>		// remove_if算法
 
 using std::cin; using std::cout; using std::endl;
-using std::string; using std::map; using std::set;
+using std::string; using std::set; using std::remove_if;
 
+using Map = std::map<std::string, std::size_t>;
+
+auto strip(string & str) -> string const &;
+ 
 int main()
 {
   set<string> exclude = {"the", "but", "is", "a", "an"};
-  map<string, size_t> word_count;
+  Map word_count;
   string word;
   while(cin >> word){
+    word = strip(word);
     if(exclude.find(word) == exclude.end()){
       word_count[word]++;
     }
@@ -24,4 +31,15 @@ int main()
   }
 
   return 0;
+}
+
+
+auto strip(string & str) -> string const &
+{
+  for(auto &ch : str){
+    ch = tolower(ch);
+  }
+
+  str.erase(remove_if(str.begin(), str.end(), ispunct), str.end());
+  return str;
 }
