@@ -7,24 +7,12 @@ using std::vector; using std::set; using std::multiset;
 
 int main()
 {
-  vector<int> vi;
-  for(int i = 0; i < 10; i++){
-    vi.push_back(i);
-    vi.push_back(i);
-  }
+  int a[6] = {0, 1, 2, 3, 4, 5};
+  int (&p)[6] = a;
 
-  // 初始化set，multiset
-  set<int> si(vi.cbegin(), vi.cend());
-  multiset<int> msi(vi.cbegin(), vi.cend());
-
-  // 输出set，multiset
-  for(auto tmp : si){
-    cout << tmp << " ";
-  }
-  cout << endl;
-
-  for(auto tmp : msi){
-    cout << tmp << " ";
+  // 测试
+  for(int i = 0; i < 6; i++){
+    cout << p[i] << " ";
   }
   cout << endl;
 
