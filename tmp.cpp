@@ -7,15 +7,21 @@ using std::vector; using std::set; using std::multiset;
 
 int main()
 {
-  int a[6] = {0, 1, 2, 3, 4, 5};
-  int (&p)[6] = a;
+  int n = 0;
+  cin >> n;
+  // int *a = new int[n];
+  int a[n];
+  for(int i = 0; i < n; i++){
+    a[i] = i;
+  }
 
   // 测试
-  for(int i = 0; i < 6; i++){
-    cout << p[i] << " ";
+  for(int i = 0; i < n; i++){
+    cout << a[i] << " ";
   }
   cout << endl;
 
+  // delete [] a;
   return 0;
 }
 
