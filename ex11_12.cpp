@@ -13,7 +13,10 @@ int main()
   int a;
   while(cin >> str >> a){
     pair<string, int> p = {str, a};
-    vp.push_back(p);
+    vp.push_back(p); 
+    // 其他的方法
+    // vp.push_back({str, i});
+    // vec.emplace_back(str, i);
   }
 
   // 输出测试
