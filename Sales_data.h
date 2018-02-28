@@ -24,6 +24,7 @@ struct Sales_data
   Sales_data(std::istream &is);
   Sales_data(const std::string &str, unsigned int num, double price) :
   bookNo(str), units_sold(num), revenue(price * num) { };
+  Sales_data(const Sales_data & orig); /* 拷贝初始化 */
   
   std::string isbn() const;
   Sales_data& combine(const Sales_data &data);
@@ -38,6 +39,13 @@ private:
 Sales_data::Sales_data(std::istream &is)
 {
   read(is, *this);
+}
+
+Sales_data::Sales_data(const Sales_data & orig)
+{
+  bookNo = orig.bookNo;
+  units_sold = orig.units_sold;
+  revenue = orig.revenue;
 }
 
 std::string Sales_data::isbn() const
