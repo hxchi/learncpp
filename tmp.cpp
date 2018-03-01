@@ -12,18 +12,22 @@ using std::cin; using std::cout; using std::endl;
 using std::vector; using std::set; using std::multiset;
 using std::min_element; using std::max_element;
 
+int func(const char *x);
 
 int main()
 {
-  const char * cp = "some value 0.";
-  while(*cp){
-    cout << *cp << " ";
-    ++cp;
-  }
-  cout << endl;
+  cout << func("hxc") << endl;
   
   return 0;
 }
 
 
 // 函数定义
+int func(const char *x)
+{
+  const char *y = x;
+  while(*y++);
+  // cout << "y = " << y << endl;
+  // cout << "x = " << x << endl;
+  return (y-x-1);
+}
