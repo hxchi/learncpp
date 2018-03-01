@@ -15,29 +15,14 @@ using std::min_element; using std::max_element;
 
 int main()
 {
-  int a[6] = {1, 2, 1, 1, 1, 3};
-  int b[5] = {1, 2, 2, 2, 3};
-
-  int bcnt[5] = {0};
-  for(int i = 0; i < (sizeof(b)/sizeof(int)); ++i){
-    ++bcnt[i];
-    for(int j = 0; j < i; ++j){
-      if(b[i] == b[j])
-	++bcnt[i];
-    }
+  const char * cp = "some value 0.";
+  while(*cp){
+    cout << *cp << " ";
+    ++cp;
   }
-
-  for(int i = 0; i < (sizeof(b)/sizeof(int)); ++i){
-    if(bcnt[i] >= (sizeof(b)/sizeof(int))/2){
-      cout << b[i] << endl;
-      break;
-    }
-  }
-
+  cout << endl;
+  
   return 0;
-  
-  
-  // 测试
 }
 
 
