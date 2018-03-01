@@ -1,5 +1,6 @@
 // c
 #include <stdio.h>
+#include <stdlib.h>
 
 // cpp
 #include <iostream>
@@ -14,13 +15,39 @@ int *cal(int * input, int n);
 
 int main()
 {
-  int a[4] = {2, 3, 4, 5};
-  // int *b = times(a, 4);
-  int * b = cal(a, 4);
+  const int N = 20;
+  int a[N];
+  for(int i = 0; i < N; i++){
+    if( i == 10)
+      a[i] = 5;
+    else if(i < 10)
+      a[i] = rand() % 5;
+    else
+      a[i] = rand() % 3 + 6; 
+  }
 
+  bool bf = 1;
+  for(int i = 1; i <= N-1; ++i){
+    bf = 1;
+    for(int j = 0; j < i; ++j){
+      if(a[j] >= a[i]){
+	bf = 0;
+	break;
+      }
+    }
+    for(int j = i+1; j < N; ++j){
+      if(a[j] <= a[i]){
+	bf = 0;
+	break;
+      }
+    }
+    if(bf)
+      cout << a[i] << endl;
+  }
+  
   // 测试
-  for(int i = 0; i < 4; i++){
-    cout << b[i] << " ";
+  for(int i = 0; i < N; i++){
+    cout << a[i] << " ";
   }
   cout << endl;
   
