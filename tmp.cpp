@@ -6,50 +6,76 @@
 #include <iostream>
 #include <vector>
 #include <set>
+#include <algorithm>
 
 using std::cin; using std::cout; using std::endl;
 using std::vector; using std::set; using std::multiset;
+using std::min_element; using std::max_element;
 
 int *times(int a[], const int n);
 int *cal(int * input, int n);
 
 int main()
 {
-  const int N = 20;
-  int a[N];
-  for(int i = 0; i < N; i++){	// 构造出符合的数组，存在某个数，大于前面的数同时小于后面的数
-    if( i == 10)
-      a[i] = 5;
-    else if(i < 10)
-      a[i] = rand() % 5;
-    else
-      a[i] = rand() % 3 + 6; 
+  const int N = 7;
+  int a[N] = {7, 10, 2, 6, 19, 22, 32};
+  // int a[N];
+  // for(int i = 0; i < N; i++){	// 构造出符合的数组，存在某个数，大于前面的数同时小于后面的数
+  //   if( i == 10)
+  //     a[i] = 5;
+  //   else if(i < 10)
+  //     a[i] = rand() % 5;
+  //   else
+  //     a[i] = rand() % 3 + 6; 
+  // }
+
+  // 方法一
+  // bool bf = 1;
+  // for(int i = 1; i <= N-1; ++i){
+  //   bf = 1;
+  //   for(int j = 0; j < i; ++j){
+  //     if(a[j] >= a[i]){
+  // 	bf = 0;
+  // 	break;
+  //     }
+  //   }
+  //   for(int j = i+1; j < N; ++j){
+  //     if(a[j] <= a[i]){
+  // 	bf = 0;
+  // 	break;
+  //     }
+  //   }
+  //   if(bf)
+  //     cout << a[i] << endl;
+  // }
+
+
+  // 方法二
+  int b[N], c[N];
+  for(int i = 0; i < N; ++i){
+    b[i] = *min_element(a+i, a+N-1);
   }
 
-  bool bf = 1;
-  for(int i = 1; i <= N-1; ++i){
-    bf = 1;
-    for(int j = 0; j < i; ++j){
-      if(a[j] >= a[i]){
-	bf = 0;
-	break;
-      }
-    }
-    for(int j = i+1; j < N; ++j){
-      if(a[j] <= a[i]){
-	bf = 0;
-	break;
-      }
-    }
-    if(bf)
+  for(int i = 0; i < N; ++i){
+    // c[i] = *max_element(a, a+i+1);
+    if(b[i] == *max_element(a, a+i+1))
       cout << a[i] << endl;
   }
+
   
   // 测试
-  for(int i = 0; i < N; i++){
+  for(int i = 0; i < N; ++i){
     cout << a[i] << " ";
   }
   cout << endl;
+
+  for(int i = 0; i < N; ++i)
+    cout << b[i] << " ";
+  cout << endl;
+
+  // for(int i = 0; i < N; ++i)
+  //   cout << c[i] << " ";
+  // cout << endl;
   
   return 0;
 }
