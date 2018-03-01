@@ -19,13 +19,14 @@ int func(const char *x);
 
 int main()
 {
-  char ch[10] = "value";
-  char * ch1 = ch;
-  cout << sizeof(ch) << endl;	// 输出10
-  cout << sizeof(ch1) << endl;	// 输出8
-  cout <<  endl;
-  cout << strlen(ch) << endl;	// 输出5
-  cout << strlen(ch1) << endl;	// 输出5
+  int n;
+  char y[10] = "nsta";
+  char *x = y;
+  n = strlen(x);
+  *x = x[n];
+  x++;
+  printf("x=%s\n", x);		// x=sta
+  printf("y=%s\n", y);		// y=
   
   return 0;
 }
