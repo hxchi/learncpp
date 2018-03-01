@@ -17,7 +17,7 @@ int main()
 {
   const int N = 20;
   int a[N];
-  for(int i = 0; i < N; i++){
+  for(int i = 0; i < N; i++){	// 构造出符合的数组，存在某个数，大于前面的数同时小于后面的数
     if( i == 10)
       a[i] = 5;
     else if(i < 10)
