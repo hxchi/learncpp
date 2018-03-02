@@ -19,14 +19,33 @@ int func(const char *x);
 
 int main()
 {
-  int n;
-  char y[10] = "nsta";
-  char *x = y;
-  n = strlen(x);
-  *x = x[n];
-  x++;
-  printf("x=%s\n", x);		// x=sta
-  printf("y=%s\n", y);		// y=
+  const char *a = "ababcabcacbab";
+  const char *b = "abcac";
+
+  int m = strlen(a);
+  int n = strlen(b);
+  if(m < n){
+    cout << "找不到匹配的子串！" << endl;
+    return -1;
+  }
+  
+  char c[n];
+  bool bf = 1;
+  for(int i = 0; i <= (m-n); ++i){
+    bf = 1;
+    for(int j = 0; j < n; ++j){
+      if(b[j] != a[i+j]){
+	bf = 0;
+	break;
+      }
+    }
+    if(bf){
+      char c[n];
+      memcpy(c, a+i, n);	// 只能是字符串数组，不能是指针。
+      cout << c << endl;
+      cout << a+i << endl;
+    }
+  }
   
   return 0;
 }
