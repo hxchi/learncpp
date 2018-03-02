@@ -30,6 +30,12 @@ class Quote{
     return x*price;
   }
 
+  virtual void debug() const {
+    cout << "基类..." << endl;
+    cout << "bookNo is " << isbn() << "  "
+	 << "price is " << price << endl;
+  }
+  
   virtual ~Quote() = default;
   
  private:
@@ -46,7 +52,8 @@ class Bulk_quote : public Quote{
   Bulk_quote(const string &s, double p, size_t x, double y) :
   Quote(s, p), min_qty(x), discount(y) { }
 
-  double net_price(size_t x) const;
+  double net_price(size_t x) const override;
+  void debug() const override;
  private:
   size_t min_qty = 0;
   double discount = 0.0;
@@ -64,6 +71,16 @@ double Bulk_quote::net_price(size_t x) const
   return (x >= min_qty) ? x*price*discount : x*price;
 }
 
+void Bulk_quote::debug() const
+{
+  cout << "派生类..." << endl;
+  /* cout << "bookNo is " << isbn() << "  " */
+  /* 	 << "price is " << price << endl; */
+  // 简化版
+  Quote::debug();
+  cout << "min_qty is " << min_qty << "  "
+	 << "discount is " << discount << endl;
+}
   
 // 非成员函数定义
 double print_total(ostream & os, const Quote & q, size_t s)
