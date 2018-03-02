@@ -16,34 +16,30 @@ using std::min_element; using std::max_element;
 using std::string; 
 
 int func(const char *x);
+const int N = 40;		// 两倍数组a的长度，可大不可小
 
 int main()
 {
-  const char *a = "ababcabcacbab";
-  const char *b = "abcac";
+  const char *a = "aabcd";
+  const char *b = "cdaa";
 
   int m = strlen(a);
   int n = strlen(b);
-  if(m < n){
-    cout << "找不到匹配的子串！" << endl;
-    return -1;
-  }
+  char c[N];	                // 为了调用字符串数组的函数，这里必须要是字符串数组
+  strcpy(c, a);			// 测试后，这边如果使用strcat函数，第一个字符会是空格
+  strcat(c, a);
   
-  char c[n];
-  bool bf = 1;
-  for(int i = 0; i <= (m-n); ++i){
+  bool bf = 1;			// 用来当标识符
+  for(int i = 0; i <= (2*m-n); ++i){
     bf = 1;
     for(int j = 0; j < n; ++j){
-      if(b[j] != a[i+j]){
+      if(b[j] != c[i+j]){
 	bf = 0;
 	break;
       }
     }
     if(bf){
-      char c[n];
-      memcpy(c, a+i, n);	// 只能是字符串数组，不能是指针。
-      cout << c << endl;
-      cout << a+i << endl;
+      cout << b << endl;
     }
   }
   
