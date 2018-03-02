@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits>		// std::numeric_limits::max()
 
 // cpp
 #include <iostream>
@@ -16,13 +17,14 @@ using std::min_element; using std::max_element;
 using std::string; 
 
 int func0(const char *x);
-void func1(const char *x);
+long long func1(const char *x);
 
 int main()
 {
-  const char a[] = "12345";
-  func1(a);
-  func1("23456");
+  const char a[] = "-12345";
+  cout << func1(a) << endl;
+  cout << func1("23a456") << endl;
+  cout << func1("+234567") << endl;
   
   return 0;
 }
@@ -39,34 +41,37 @@ int func0(const char *x)
 }
 
 
-void func1(const char *x)
+long long func1(const char *x)
 {
-  while(*x){
-    switch (*x){
-      case 48 : cout << 0;
-	break;
-      case 49 : cout << 1;
-	break;
-      case 50 : cout << 2;
-	break;
-      case 51 : cout << 3;
-	break;
-      case 52 : cout << 4;
-	break;
-      case 53 : cout << 5;
-	break;
-      case 54 : cout << 6;
-	break;
-      case 55 : cout << 7;
-	break;
-      case 56 : cout << 8;
-	break;
-      case 57 : cout << 9;
-	break;
-      default : cout << "有非数字字符串，报错。" << endl;
-	break;
-    }
+  long long a = 0;
+
+  bool bl = 1;			// 1代表是正数，0代表是负数
+  if(*x == '+'){		// 先对第一个字符进行判断
+    bl = 1;
     ++x;
   }
-  cout << endl;
+  else if(*x == '-'){
+    bl = 0;
+    ++x;
+  }
+ 
+  while(*x){
+    if((*x >= '0') && (*x <= '9')){
+      a = 10*a + (*x - '0');
+      if(a > std::numeric_limits<int>::max()){
+	a = 0;
+	break;
+      }
+      ++x;
+    }
+    else{
+      a = 0;
+      break;
+    }
+  }
+
+  if(!bl)
+    a = - a;
+  
+  return a;
 }
