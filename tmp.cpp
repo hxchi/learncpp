@@ -15,44 +15,58 @@ using std::vector; using std::set; using std::multiset;
 using std::min_element; using std::max_element;
 using std::string; 
 
-int func(const char *x);
-const int N = 40;		// 两倍数组a的长度，可大不可小
+int func0(const char *x);
+void func1(const char *x);
 
 int main()
 {
-  const char *a = "aabcd";
-  const char *b = "cdaa";
-
-  int m = strlen(a);
-  int n = strlen(b);
-  char c[N];	                // 为了调用字符串数组的函数，这里必须要是字符串数组
-  strcpy(c, a);			// 测试后，这边如果使用strcat函数，第一个字符会是空格
-  strcat(c, a);
-  
-  bool bf = 1;			// 用来当标识符
-  for(int i = 0; i <= (2*m-n); ++i){
-    bf = 1;
-    for(int j = 0; j < n; ++j){
-      if(b[j] != c[i+j]){
-	bf = 0;
-	break;
-      }
-    }
-    if(bf){
-      cout << b << endl;
-    }
-  }
+  const char a[] = "12345";
+  func1(a);
+  func1("23456");
   
   return 0;
 }
 
 
 // 函数定义
-int func(const char *x)
+int func0(const char *x)
 {
   const char *y = x;
   while(*y++);
   // cout << "y = " << y << endl;
   // cout << "x = " << x << endl;
   return (y-x-1);
+}
+
+
+void func1(const char *x)
+{
+  while(*x){
+    switch (*x){
+      case 48 : cout << 0;
+	break;
+      case 49 : cout << 1;
+	break;
+      case 50 : cout << 2;
+	break;
+      case 51 : cout << 3;
+	break;
+      case 52 : cout << 4;
+	break;
+      case 53 : cout << 5;
+	break;
+      case 54 : cout << 6;
+	break;
+      case 55 : cout << 7;
+	break;
+      case 56 : cout << 8;
+	break;
+      case 57 : cout << 9;
+	break;
+      default : cout << "有非数字字符串，报错。" << endl;
+	break;
+    }
+    ++x;
+  }
+  cout << endl;
 }
