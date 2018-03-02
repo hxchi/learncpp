@@ -46,17 +46,29 @@ class Quote{
 };
 
 // 派生类定义
-class Bulk_quote : public Quote{
+class Disc_quote : public Quote{
  public:
-  Bulk_quote() = default;
-  Bulk_quote(const string &s, double p, size_t x, double y) :
-  Quote(s, p), min_qty(x), discount(y) { }
+  Disc_quote() = default;
+  Disc_quote(const string & a, double b, size_t c, double d) :
+  Quote(a, b), min_qty(c), discount(d) { }
 
-  double net_price(size_t x) const override;
-  void debug() const override;
+  virtual double net_price(size_t a) const override = 0; /* virtual override */
+
  private:
   size_t min_qty = 0;
   double discount = 0.0;
+  
+};
+
+
+class Bulk_quote : public Disc_quote{
+ public:
+  Bulk_quote() = default;
+  Bulk_quote(const string &s, double p, size_t x, double y) :
+  Disc_quote(s, x, y, z) { }
+
+  double net_price(size_t x) const override;
+  void debug() const override;
 };
 
 // 成员函数定义
