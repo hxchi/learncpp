@@ -20,6 +20,9 @@ int func0(const char *x);
 long long func1(const char *x);
 void func2(const string &a, int b[26]);
 bool func3(const string &rht, const string &lft);
+// 例3
+long long func4(const char *a);
+long long func5(const char *a, const char *b);
 
 int main()
 {
@@ -30,17 +33,25 @@ int main()
   // cout << func1("+234567") << endl;
 
   // 测试func2
-  int b[26] = {0};
-  string s1 = "abccdefghlmnopqrs";
-  string s2 = "dcgsrqpomc";
-  string s3 = "dcgsrqpozc";
-  if(func3(s1, s3))
-    cout << "包含！" << endl;
-  else
-    cout << "不包含！" << endl;
+  // int b[26] = {0};
+  // string s1 = "abccdefghlmnopqrs";
+  // string s2 = "dcgsrqpomc";
+  // string s3 = "dcgsrqpozc";
+  // if(func3(s1, s3))
+  //   cout << "包含！" << endl;
+  // else
+  //   cout << "不包含！" << endl;
   // cout << s1.length() << endl;
   // cout << s1.size() << endl;
   // func2(s1, b);
+
+  // 测试 例3
+  const char *a = "12345";
+  const char *b = "23456";
+  cout << func5(a, b) << endl;
+
+
+  
   return 0;
 }
 
@@ -125,4 +136,22 @@ bool func3(const string &rht, const string &lft)
     }
   }
   return 1;
+}
+
+// 例3
+long long func4(const char *a)
+{
+  long long num = 0;
+  while(*a){
+    if((*a >= '0') && (*a <= '9')){
+      num = 10*num + (*a - '0');
+      a++;
+    }
+  }
+  return num;
+}
+
+long long func5(const char *a, const char *b)
+{
+  return func4(a)*func4(b);
 }
