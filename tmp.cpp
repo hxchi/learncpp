@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <limits>		// std::numeric_limits::max()
+#include <assert.h>		// 函数assert()
 
 // cpp
 #include <iostream>
@@ -23,6 +24,8 @@ bool func3(const string &rht, const string &lft);
 // 例3
 long long func4(const char *a);
 long long func5(const char *a, const char *b);
+// 例3 答案
+void multiply(const char *rht, const char *lft);
 
 int main()
 {
@@ -46,9 +49,14 @@ int main()
   // func2(s1, b);
 
   // 测试 例3
-  const char *a = "12345";
-  const char *b = "23456";
-  cout << func5(a, b) << endl;
+  // const char *a = "12345";
+  // const char *b = "23456";
+  // cout << func5(a, b) << endl;
+
+  // 测试 例3 答案
+  multiply("12", "12");
+  multiply("123", "123");
+  multiply("1234", "2453");
 
 
   
@@ -154,4 +162,46 @@ long long func4(const char *a)
 long long func5(const char *a, const char *b)
 {
   return func4(a)*func4(b);
+}
+
+// 例3 答案
+void multiply(const char *rht, const char *lft)
+{
+  assert((rht != NULL) && (lft != NULL)); // 如果条件语句的返回值为0，那么就终止程序
+
+  int i, j, crht, clft, *s;
+  crht = strlen(rht);
+  clft = strlen(lft);
+
+  s = (int *)malloc(sizeof(int)*(crht+clft)); // 分配内存
+  for(i = 0; i < (crht+clft); i++)	      // 将数组初始化
+    s[i] = 0;
+  for(i = 0; i < crht; i++)
+    for(j = 0; j < clft; j++)
+      s[i+j+1] += (rht[i] - '0')*(lft[j] - '0');
+  for(i = (crht+clft-1); i >= 0; i--) // 这里实现进位操作
+    if(s[i] >= 10){
+      s[i-1] += s[i]/10;
+      s[i] %= 10;
+    }
+
+  char *c = new char[(crht+clft)];
+  // char *c = (char *)malloc((crht+clft)*sizeof(char));
+  i = 0;
+  while(s[i] == 0)
+    i++;
+  for(j = 0; i < (crht+clft); i++, j++){
+    c[j] = s[i] + '0';
+    // cout << c[j] << endl;
+  }
+  c[j] = '\0';
+
+  // for(j = 0; j < (crht+clft); j++)
+  //   cout << c[j];
+  // cout << endl;
+  cout << c << endl;
+
+  free(s);
+  // free(c);
+  delete [] c;
 }
