@@ -4,10 +4,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>	//	pow
 
 //	宏定义
-#define STACK_MAX_SIZE 5
-#define STACK_INCREAM 2
+#define STACK_MAX_SIZE 100
+#define STACK_INCREAM 10
 
 
 typedef int ElemType;
@@ -33,6 +34,10 @@ void _initStack(sqStack *s)
 
 	s->top = s->base;	//	空栈，栈底就是栈顶
 	s->stackSize = STACK_MAX_SIZE;
+
+	//	测试base+1的地址
+	// printf("s->base: %x\n", s->base);
+	// printf("s->base + 1: %x\n", ++s->base);		//	注意这里需要++在前 
 }
 
 
@@ -74,6 +79,60 @@ void pop(sqStack *s, int n)
 	}
 }
 
+
+//	清空一个栈
+//	注意不是销毁，栈本身的物理空间并没有发生变化
+void _clearStack(sqStack *s)
+{
+	//	空栈的标准就是栈顶和栈底重合
+	s->top = s->base;
+}
+
+
+//	销毁一个栈
+//	将该栈从内存中移除
+void _deleteStack(sqStack *s)
+{
+	int len;	//	表示栈的空间
+
+	len = s->stackSize;
+	for(int i = 0; i < len; i++){
+		free(s->base);
+		s->base++;	//	只会移动base类型的长度
+	}
+
+	s->base = s->top = NULL;
+	s->stackSize = 0;
+}
+
+
+//	计算栈的当前容量（不是栈的最大容量）
+int _lengthStack(sqStack *s)
+{
+	return (s->top - s->base);
+}
+
+
+//	将二进制数转换为十进制数
+int _binToDec(sqStack *s)
+{
+	int len = _lengthStack(s);	//	记录该栈的当前长度
+	printf("当前栈的长度为：%d\n", len);
+	int sum = 0;	//	转化后的十进制数
+
+	for(int i = 0; i < len; i++){
+		s->top--;
+		sum += (*(s->top))*pow(2.0, (double)i);
+
+		// //	输出测试
+		// printf("s->top：%d\n", *(s->top));
+		// printf("pow：%d\n", (int)pow(2.0, (double)i));
+		// printf("sum = %d\n\n", sum);
+	}
+
+	return sum;
+}
+
 //	main函数
 int main(int argc, char const *argv[])
 {
@@ -91,7 +150,7 @@ int main(int argc, char const *argv[])
 		push(&s, opt);
 	}
 
-	pop(&s, 10);
+	printf("对应的十进制为：%d\n", _binToDec(&s));
 	
 
 	return 0;
