@@ -96,8 +96,9 @@ int main(int argc, char const *argv[])
 	
 	len = _lengthStack(s);
 	for(int i = 0; i < len; i++){
-		s.top--;
-		sum += ((int)(*(s.top) - '0')) * pow(2.0, (double)i);
+		_pop(&s, &c);
+		printf("%c\n", c);
+		sum += ((int)(c - '0')) * pow(2.0, (double)i);
 	}
 	
 	printf("对应的十进制数为：%d\n", sum);
